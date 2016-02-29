@@ -19,9 +19,10 @@
   # wenn installiert geht die task
   with_items:
     - emacs-nox
-#    - locales-all
-#    - python-mysqldb
-#    - sudo
+    - locales-all
+    - python-mysqldb
+    - sudo
+    - bash-completion
 #  sudo: yes
   tags: test-1
   

@@ -1,0 +1,11 @@
+---
+
+- name: install Admin Utilities, nicht notwändigt für der Betrieb
+  apt: name={{item}} state=installed
+  with_items:
+    - htop
+    - colordiff
+    - discus
+    - screen
+    - ncdu
+  tags: debianpackages

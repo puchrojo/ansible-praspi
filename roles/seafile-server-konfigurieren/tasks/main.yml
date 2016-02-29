@@ -1,0 +1,46 @@
+---
+
+- name: SSL Zertifikat von lets encript
+  debug: msg="TODO, von lets encript"
+  # https://github.com/felixfontein/letsencrypt-ansible  # create Cert auf admin Rechner
+  # https://github.com/thefinn93/ansible-letsencrypt     # create Cert auf Server
+  # https://github.com/PeterMosmans/ansible-role-letsencrypt
+  # https://github.com/CorbanR/ansible-letsencrypt
+
+- name: SSL Zertifikat von Feder, Verzeichnisse
+  file:  name=/etc/feder/ssl/psw.net/{{item}}/ state=directory mode=750
+  with_items:
+    - crt
+    - key
+
+- name: SSL Zertifikat von Feder, Copy crt
+  copy:  src=/etc/feder/ssl/psw.net/crt/feder-software.de-all.crt
+        dest=/etc/feder/ssl/psw.net/crt/feder-software.de-all.crt
+
+- name: SSL Zertifikat von Feder, Copy key
+  copy:  src=/etc/feder/ssl/psw.net/key/feder-software.de.key
+        dest=/etc/feder/ssl/psw.net/key/feder-software.de.key
+
+- name: SSL Zertifikat von Feder. Todo mode
+  debug: msg="ToDo, die Mode so restriktives wie möglich zu definieren"
+
+- name: SSL Zertifikat von Feder. /etc/nginx/conf.d/seafile.conf (crt)
+  lineinfile: dest="/etc/nginx/conf.d/seafile.conf"
+              regexp="ssl_certificate /etc/nginx/ssl/seafile.crt;"
+              line="  ssl_certificate /etc/feder/ssl/psw.net/crt/feder-software.de-all.crt;"
+
+- name: SSL Zertifikat von Feder. /etc/nginx/conf.d/seafile.conf (key)
+  lineinfile: dest="/etc/nginx/conf.d/seafile.conf"
+              regexp="ssl_certificate_key /etc/nginx/ssl/seafile.key;"
+              line="  ssl_certificate_key /etc/feder/ssl/psw.net/key/feder-software.de.key;"
+
+# Wer startet nginx?
+# Momentan fehlt
+
+
+
+
+
+- name: FIXME am Ende
+  debug: msg="Unbeding ansible.com schreiben und fragen nach Parameter im install Srkipt und evlt. Debian für raspi2"
+  

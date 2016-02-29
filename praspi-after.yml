@@ -1,0 +1,6 @@
+---
+# Requires Ansible >= 1.9
+
+- hosts: all
+  roles:
+    - seafile-server-konfigurieren

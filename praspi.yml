@@ -5,9 +5,10 @@
 #  become_user: root
 - hosts: all
   roles:
-    #- git-etckeeper
+    - git-etckeeper
     - hostname
-    #- users
-    #- update-packages
-    #- osmc-config
-    #- seafile-server
+    - users
+    - update-packages
+    - debianpackages
+    - osmc-config
+    - seafile-server
