@@ -24,3 +24,4 @@ Einletung Install Seafile-Server PRO with osmc (Debian 8 Jessie) on a Raspberry 
    ansible-playbook praspi-after.yml
    ```
    
+6. TODO: Change password osmc im Script
