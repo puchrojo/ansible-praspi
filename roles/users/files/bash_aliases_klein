@@ -1,0 +1,29 @@
+#!/bin/bash
+# PR: kleine samlung von Alias
+# In der Regel durch include in .bashrc und .bash_profile dürch
+# source ~/.alias
+
+export EDITOR='emacs'
+
+eval $(dircolors)
+export LS_OPTIONS=' -h --color=auto'
+alias ls='ls $LS_OPTIONS'
+alias ll='ls $LS_OPTIONS -l'
+alias l='ls $LS_OPTIONS -lA'
+alias dir='ls'
+alias df='df -h --exclude-type=tmpfs'
+alias du='du -h'
+alias ..='cd ..'
+alias ...='cd ../../'
+alias ....='cd ../../../'
+alias mk='mkdir -p '
+
+# Test Velocidad
+alias testVelocidadCliente='iperf -c 192.168.3.21 -P 1 -i 1 -p 5001 -u -w 1470.0K -l 1.0K -f k -b 1000.0M -t 30 -T 1'
+alias testVelocidadServidor='iperf -s'
+# Sonstiges
+alias alive='echo who -b && who -b'
+alias suchen-daemon='ps aux|grep '
+alias diskBeledung='echo "baobab|filelight|ncdu"'
+alias syslog='tail -f /var/log/syslog'
+alias popup='zenity --info --text $1'

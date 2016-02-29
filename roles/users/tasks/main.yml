@@ -1,0 +1,35 @@
+---
+
+# *****************
+# * user puchrojo *
+# *****************
+# Doku: https://serversforhackers.com/an-ansible-tutorial
+#       http://docs.ansible.com/ansible/authorized_key_module.html
+#password={% verbatim %}{{ puchrojo_password }}{% endverbatim %}
+# Was verbatim ist habe ich nicht rausgefunden und hat Fehler gemacht
+
+- name: Add Gruppe puchrojo
+  group: name=feder gid=1048 state=present
+  tags: test253  
+
+- name: Add Benutzer puchrojo, zum testen
+  #     #password={{puchrojo_password}} # weglelasen um es einfach zu machen. Key oder nichts. 
+  user:
+    name=puchrojo
+    groups=sudo
+    append=yes
+    shell=/bin/bash
+    uid=1048
+  tags: users
+    
+- name: Add Authorized Key
+  authorized_key:
+    user=puchrojo
+    key=https://github.com/puchrojo.keys
+    state=present
+  tags: users
+
+- name: Add .bash_aliases
+  copy: src=bash_aliases_klein dest=/home/puchrojo/.bash_aliases
+        owner=puchrojo group=puchrojo mode=0640
+  tags: test2

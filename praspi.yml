@@ -1,0 +1,13 @@
+---
+# Requires Ansible >= 1.9
+#- hosts: 192.168.3.39
+#  become: yes
+#  become_user: root
+- hosts: all
+  roles:
+    #- git-etckeeper
+    - hostname
+    #- users
+    #- update-packages
+    #- osmc-config
+    #- seafile-server

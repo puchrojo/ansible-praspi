@@ -1,0 +1,37 @@
+---
+
+# - name: hostname setzen
+#   shell: /bin/hostname {{hostname}}
+
+# - name: /etc/hostname
+#   template: src=hostname.j2 dest=/etc/hostname
+ 
+- name: test hosname 1. Siehe /tmp/test-hostname
+  shell: /bin/hostname > /tmp/test-hostname
+
+- name: /etc/hosts IPv4 Hostname
+  lineinfile: dest=/etc/hosts regexp="^{{inventory_hostname}}" line="{{inventory_hostname}}  {{hostname}}.{{Domain}} {{hostname}}"  
+# - name: /etc/hosts IPv4 Hostname
+#   # shell: sed -i "s/^{{ansible_default_ipv4.address}}.*/{{ansible_default_ipv4.address}}  {{hostname}}.{{Domain}} {{hostname}}/g" /etc/hosts
+#   shell: sed -i "s/^{{inventory_hostname}}.*/{{inventory_hostname}}  {{hostname}}.{{Domain}} {{hostname}}/g" /etc/hosts
+
+#- name: /etc/hosts IPv6 Hostname
+#  shell: sed -i "s/^{{ansible_default_ipv6.address}}.*/{{ansible_default_ipv6.address}}  {{hostname}}.{{Domain}} {{hostname}}/g" /etc/hosts
+
+
+- name: Test FQDN (1)
+  shell: hostname
+  register: ValueHostname
+- name: Test FQDN (2) hostname OK
+  shell: error hostname lauft nicht && error asfsd 
+  when: ( "{{ValueHostname.stdout}}" != "{{hostname}}" )
+- name: Test FQDN (3) 
+  shell: hostname -f 
+  register: ValueHostnameDomain
+- name: Test FQDN (4) hostname -f OK
+  shell: error hostname -f lauft nicht && error asfsd 
+  when: ( "{{ValueHostnameDomain.stdout}}" != "{{hostname}}.{{Domain}}" )
+
+- name: etckeeper commit
+  shell: cd /etc/ && git diff-index --quiet HEAD || etckeeper commit "ansible hostname commit state."
+  

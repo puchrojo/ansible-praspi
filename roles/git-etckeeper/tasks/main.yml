@@ -1,0 +1,59 @@
+---
+
+- name: raw aptitude update
+  #raw: aptitude update
+  raw: apt-get update
+  tags: test-raw
+#  sudo: yes
+- name: raw install python python-simplejson
+  #raw: aptitude -y install python python-simplejson aptitude
+  # Manuell ist gelaufen, checken warum über aptitude nicht
+  raw: apt-get -y install python python-simplejson aptitude
+  tags: test-raw
+#  sudo: yes
+  
+- name: install required binary packages
+  apt: name={{item}} state=installed update_cache=yes
+  # warum geht es mit emacs-nox alleine nicht, manuell mit sudo geht
+  # sudo aptitude install emacs-nox
+  # wenn installiert geht die task
+  with_items:
+    - emacs-nox
+#    - locales-all
+#    - python-mysqldb
+#    - sudo
+#  sudo: yes
+  tags: test-1
+  
+- name: install etckeeper
+  apt: name={{item}} state=installed update_cache=yes
+  with_items:
+    - etckeeper
+    - git
+#  sudo: yes
+  become_user: root
+  tags: test-2
+
+#  become: yes
+#  become_user: some_user
+
+- name: Git conf (1)
+  #shell: git config --global user.name "$(hostname)"
+  shell: git config --global user.name "Isaac"
+- name: Git conf (2)
+  #shell: git config --global user.email "root@$(hostname -f)"
+  shell: git config --global user.email "puchrojo@gmail.com"
+- name: Git conf (3)
+  shell: git config --global color.ui true
+- name: Git conf (4)
+  shell: git config --global --add alias.flog "log --pretty=format:'%h %ad %s. %an' --date=short"
+- name: Git conf (5)
+  shell: git config --global --add alias.lol  "log --graph --decorate --pretty=oneline --abbrev-commit"
+- name: Git conf (6)
+  shell: git config --global --add alias.lola "log --graph --decorate --pretty=oneline --abbrev-commit --all"
+- name: Git conf (7)
+  shell: git config --global push.default simple
+
+- name: etckeeper commit
+  shell: cd /etc/ && git diff-index --quiet HEAD || etckeeper commit "ansible git-etckeeper commit state."
+  ignore_errors: True

@@ -1,0 +1,38 @@
+---
+
+# seafile server so weit wie Möglich hiermit installieren
+# Es sollte eine Regel zum abbrechen wenn es gelaufen ist, da der Installer nicht indepotenz ist.
+
+
+- name: Install seafile-server
+  debug: msg="Doku. https://github.com/SeafileDE/seafile-server-installer"
+
+- name: Package dependences
+  apt: name={{item}} state=installed update_cache=yes cache_valid_time=3600
+  with_items:
+    - lsb-release
+
+- name: Get Install Script
+  get_url: url=https://raw.githubusercontent.com/SeafileDE/seafile-server-installer/master/seafile_v5_debian dest=/root/seafile_v5_debian mode=0750 validate_certs=no
+  # cd /root
+  # wget --no-check-certificate https://raw.githubusercontent.com/SeafileDE/seafile-server-installer/master/seafile_v5_debian
+  # bash seafile_v5_debian
+
+- name: Create directory for sources.
+  file: name=/usr/src/seafile/ state=directory mode=750 
+  
+- name: seafile-professional-source
+  get_url: url='https://cloud.seafile.de/d/a888216da8/files/?p=/latest/seafile-pro-server_5.0.5_x86-64.tar.gz&dl=1' dest='/usr/src/seafile/seafile-pro-server_5.0.5_x86-64.tar.gz'
+  # wget "https://seacloud.cc/d/7b81897503/files/?p=/seafile-pro-server_4.3.3_x86-64.tar.gz&dl=1" -O seafile-pro-server_4.3.3_x86-64.tar.gz
+
+  
+- name: ToDo
+  debug: msg="Ein .bash_aliases mit ein minimum als alias definieren und für root, puchrojo definieren"
+  
+- name: Befehlt soll manuell ausfeführt werden.
+  debug: msg="bash /root/seafile_v5_debian"
+  
+# Antworten:
+# 2) PRO
+#
+

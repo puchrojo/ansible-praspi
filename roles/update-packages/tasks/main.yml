@@ -1,0 +1,13 @@
+---
+
+
+- name: Update all packages to the latest version
+  apt: upgrade=dist cache_valid_time=3600
+  tags: update-packages
+
+- name: FIXME configure dependences
+  debug: msg='SELECT VARIABLE_VALUE as "cluster size" FROM INFORMATION_SCHEMA.GLOBAL_STATUS WHERE VARIABLE_NAME=\'wsrep_cluster_size\'; als dependence roles/cluster-test or somenthing similar'
+
+- name: etckeeper commit
+  shell: cd /etc/ && git diff-index --quiet HEAD || etckeeper commit "ansible update-packages commit state."
+

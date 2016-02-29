@@ -1,0 +1,29 @@
+# {{inventory_hostname}} # deprecated, da von server1 auf server1.feder-software.de wechseln kann
+# {{ansible_hostname}}
+# {{ansible_fqdn}}
+
+# ansible all -i hosts -u root -m setup
+# ...
+# "ansible_fqdn": "server1.feder-software.de",
+# "ansible_hostname": "server1",
+# ..	
+
+# Für roles/kundenserver-hostname
+# Die Variable NeueHostname soll in die hosts Datei so definiert werden:
+# server1.feder-software.de NeueHostname=server1bis
+# und die kundenserver-server1 als playbook definieren mit die sprechende Server.
+# Hier soll es möglich nichts definiert sein,
+# und es eher nicht nutzen sonder selber in hetzner-install image definieren. 
+# NeueHostname: server1 
+
+# Alle andere Roles nutzen die {{inventory_hostname}} statdessen. 
+Domain: feder-software.de
+
+# Wenn alles stabil lauft kann der Parameter über die Komandozeile abgegeben werden.
+# oder wie jetzt lieber in value gespeichert
+# MysqlRootPassword: w...
+
+# {{ansible_default_ipv4.address}}
+# {{ansible_default_ipv6.address}}
+
+
