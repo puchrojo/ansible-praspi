@@ -1,5 +1,6 @@
+# ansible-praspi
 
-  Einletung Install osmc auf praspi
+Einletung Install Seafile-Server PRO with osmc (Debian 8 Jessie) on a Raspberry Pi 2 with ansible
 
 1. "Install OSMC auf die SD-Karte über andere Rechner mit Kartenlesser."
    https://osmc.tv/download/
@@ -20,4 +21,3 @@
 
 5. "Ansible kann die SSL-Keys konfiguriert:
    ansible-playbook praspi-after.yml
-
