@@ -39,7 +39,14 @@
         owner=root group=root mode=0640
   tags: test2
 
-
+- name: aktivieren .bash_aliases für root
+  lineinfile: dest=/root/.bashrc regexp="^source ~/.bash_aliases" line="source ~/.bash_aliases"
+  tags: test2
+   
 - name: script version
   copy: src=/usr/local/bin/feder/version dest=/usr/local/bin/version mode=0755
   tags: version
+
+- name: Delte standard Password für osmc
+  shell: passwd osmc -d
+  
