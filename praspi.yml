@@ -12,3 +12,7 @@
     - debianpackages
     - osmc-config
     - seafile-server
+
+# Die Vorbereitung der SDcard geht mit
+# gzip -dc OSMC_TGT_rbp2_20160130.img.gz | pv | sudo dd of=/dev/sdd && sync
+
