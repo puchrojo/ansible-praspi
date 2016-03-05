@@ -60,3 +60,8 @@
 - name: etckeeper commit
   shell: cd /etc/ && git diff-index --quiet HEAD || etckeeper commit "ansible git-etckeeper commit state."
   ignore_errors: True
+
+- name: Ubuntu UTF-8 locale Problem
+  #shell: update-locale LANG=de_DE.UTF-8
+  debug: msg="http://ubuntuforums.org/showthread.php?t=1720356"
+  

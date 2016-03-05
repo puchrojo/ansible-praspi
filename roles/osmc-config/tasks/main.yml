@@ -3,5 +3,12 @@
 - name: Die externe Festplatte geht nicht wenn man das nicht anpasst
   lineinfile: dest=/boot/config.txt regexp="^max_usb_current" line="max_usb_current=1"
 
+- name: Ubuntu. Verzeichnis zum mounten externe Festplatte
+  file: name="/praspi" state=directory
+
+- name: Ubuntu anpassen
+  lineinfile: dest=/etc/fstab regexp="^/dev/sda1 " line="/dev/sda1      /praspiext4    defaults,noatime  0       0"
+  
+  
 - name: etckeeper commit
   shell: cd /etc/ && git diff-index --quiet HEAD || etckeeper commit "ansible osmc-config commit state."

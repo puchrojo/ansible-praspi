@@ -5,13 +5,14 @@
 #  become_user: root
 - hosts: all
   roles:
-    #- git-etckeeper
-    #- hostname
+    - git-etckeeper
+    - hostname
     - users
     - update-packages
     - debianpackages
-    - osmc-config
-    #- seafile-server
+    - osmc-config    # auch für Ubuntu
+    - kodi-xbmc      # Nur Ubuntu 
+    # #- seafile-server # nicht getesetet
 
 # Die Vorbereitung der SDcard geht mit
 # gzip -dc OSMC_TGT_rbp2_20160130.img.gz | pv | sudo dd of=/dev/sdd && sync

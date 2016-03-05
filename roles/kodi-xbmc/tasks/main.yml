@@ -1,0 +1,10 @@
+---
+
+- name: Install Kodi (xmbc) in Ubuntu
+  apt: name={{item}} state=installed
+  with_items:
+    - xbmc
+  tags: kodi
+
+  
+    
