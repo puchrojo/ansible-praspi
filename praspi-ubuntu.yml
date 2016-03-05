@@ -1,0 +1,18 @@
+---
+# Requires Ansible >= 1.9
+#- hosts: 192.168.3.39
+#  become: yes
+#  become_user: root
+- hosts: all
+  roles:
+    #- git-etckeeper
+    #- hostname
+    - users
+    - update-packages
+    - debianpackages
+    - osmc-config
+    #- seafile-server
+
+# Die Vorbereitung der SDcard geht mit
+# gzip -dc OSMC_TGT_rbp2_20160130.img.gz | pv | sudo dd of=/dev/sdd && sync
+

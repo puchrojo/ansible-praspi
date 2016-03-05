@@ -1,10 +1,10 @@
 ---
 
-# - name: hostname setzen
-#   shell: /bin/hostname {{hostname}}
+- name: hostname setzen
+  shell: /bin/hostname {{hostname}}
 
-# - name: /etc/hostname
-#   template: src=hostname.j2 dest=/etc/hostname
+- name: /etc/hostname
+  template: src=hostname.j2 dest=/etc/hostname
  
 - name: test hosname 1. Siehe /tmp/test-hostname
   shell: /bin/hostname > /tmp/test-hostname

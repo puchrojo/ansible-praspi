@@ -17,9 +17,11 @@
   # warum geht es mit emacs-nox alleine nicht, manuell mit sudo geht
   # sudo aptitude install emacs-nox
   # wenn installiert geht die task
+  #- emacs-nox gibt es nur in debian, in ubuntu emacs24-nox
   with_items:
-    - emacs-nox
-    - locales-all
+    - emacs24-nox
+    # - locales-all  # nur in debian, nicht in Ubuntu
+    - gcc-4.8-locales
     - python-mysqldb
     - sudo
     - bash-completion

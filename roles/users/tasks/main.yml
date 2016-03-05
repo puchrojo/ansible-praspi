@@ -47,6 +47,10 @@
   copy: src=/usr/local/bin/feder/version dest=/usr/local/bin/version mode=0755
   tags: version
 
-- name: Delte standard Password für osmc
+- name: Delte standard Password für osmc (nur Debian/OSMC)
   shell: passwd osmc -d
-  
+  ignore_errors: True
+
+- name: Delte standard Password für ubuntu (nur Ubuntu)
+  shell: passwd ubuntu -d
+  ignore_errors: True
